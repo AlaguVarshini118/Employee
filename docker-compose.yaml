@@ -1,0 +1,27 @@
+# Remove the version attribute
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    volumes:
+      - ./client:/c/Project/RegistrationForm-main/client
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: /c/Project/RegistrationForm-main/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
